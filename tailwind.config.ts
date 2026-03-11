@@ -21,8 +21,8 @@ const config: Config = {
         nagad: '#F05829',
       },
       fontFamily: {
-        heading: ['var(--font-playfair)', 'serif'],
-        body: ['var(--font-inter)', 'sans-serif'],
+        heading: ['Playfair Display', 'Georgia', 'Cambria', 'serif'],
+        body: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
     },
   },

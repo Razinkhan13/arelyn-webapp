@@ -12,7 +12,7 @@ export default function ShopPage() {
   const [sortBy, setSortBy] = useState('newest')
 
   const categories = useMemo(() => {
-    return [...new Set(sampleProducts.map((p) => p.category))]
+    return Array.from(new Set(sampleProducts.map((p) => p.category)))
   }, [])
 
   const filtered = useMemo(() => {
