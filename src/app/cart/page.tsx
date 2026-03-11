@@ -5,17 +5,44 @@ import { formatPrice } from '@/lib/utils'
 import CartItemComponent from '@/components/cart/CartItem'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
-import { ShoppingBag, ArrowLeft } from 'lucide-react'
+import { ShoppingBag, ArrowLeft, Truck } from 'lucide-react'
+
+const FREE_SHIPPING_THRESHOLD = 3000
 
 export default function CartPage() {
   const { items, total, clearCart } = useCartStore()
   const cartTotal = total()
-  const shipping = cartTotal > 3000 ? 0 : 120
+  const shipping = cartTotal > FREE_SHIPPING_THRESHOLD ? 0 : 120
+  const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - cartTotal)
+  const progress = Math.min(100, (cartTotal / FREE_SHIPPING_THRESHOLD) * 100)
 
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="font-heading text-3xl font-bold text-brand-dark mb-8">Shopping Cart</h1>
+
+        {/* Free Shipping Progress Bar */}
+        {items.length > 0 && (
+          <div className="bg-brand-cream rounded-xl p-4 mb-6">
+            <div className="flex items-center gap-2 mb-2">
+              <Truck size={16} className="text-brand-sage" />
+              {remaining > 0 ? (
+                <p className="text-sm text-gray-700">
+                  Add <span className="font-semibold text-brand-rose">{formatPrice(remaining)}</span> more for{' '}
+                  <span className="font-semibold text-brand-sage">FREE shipping!</span>
+                </p>
+              ) : (
+                <p className="text-sm font-semibold text-brand-sage">🎉 You have FREE shipping!</p>
+              )}
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-brand-sage rounded-full transition-all duration-500"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+        )}
 
         {items.length === 0 ? (
           <div className="text-center py-20">
