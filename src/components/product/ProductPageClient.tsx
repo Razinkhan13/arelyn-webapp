@@ -7,15 +7,18 @@ import { useCartStore } from '@/store/cart'
 import ProductGallery from '@/components/product/ProductGallery'
 import SizeGuide from '@/components/product/SizeGuide'
 import RelatedProducts from '@/components/product/RelatedProducts'
+import ProductReviews from '@/components/product/ProductReviews'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Toast from '@/components/ui/Toast'
-import { ShoppingBag, Heart, Truck, Shield, RotateCcw } from 'lucide-react'
+import { ShoppingBag, Heart, Truck, Shield, RotateCcw, Star, Eye, MessageCircle } from 'lucide-react'
 
 type ProductPageClientProps = {
   product: Product
   relatedProducts: Product[]
 }
+
+const WHATSAPP_NUMBER = '8801700000000'
 
 export default function ProductPageClient({ product, relatedProducts }: ProductPageClientProps) {
   const addItem = useCartStore((s) => s.addItem)
@@ -27,11 +30,20 @@ export default function ProductPageClient({ product, relatedProducts }: ProductP
     ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
     : 0
 
+  // Simulated urgency signals
+  const stockLeft = product.id === '1' ? 3 : product.id === '3' ? 5 : null
+  const viewersNow = 8 + (parseInt(product.id, 10) % 7)
+
   const handleAddToCart = () => {
     if (!selectedSize || !selectedColor) return
     addItem(product, selectedSize, selectedColor)
     setShowToast(true)
   }
+
+  const whatsappMessage = encodeURIComponent(
+    `Hi ARELYN! I want to order:\n*${product.name}*\nSize: ${selectedSize || '(please specify)'}\nColor: ${selectedColor || '(please specify)'}\nPrice: ${formatPrice(product.price)}\n\nPlease confirm availability.`
+  )
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`
 
   return (
     <>
@@ -53,6 +65,29 @@ export default function ProductPageClient({ product, relatedProducts }: ProductP
                 </div>
                 <h1 className="font-heading text-3xl font-bold text-brand-dark">{product.name}</h1>
                 <p className="text-gray-500 text-sm mt-1">{product.category}</p>
+
+                {/* Star rating summary */}
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} size={14} className="text-brand-gold fill-brand-gold" />
+                    ))}
+                  </div>
+                  <span className="text-sm text-gray-500">4.8 (3 reviews)</span>
+                </div>
+              </div>
+
+              {/* Urgency signals */}
+              <div className="flex flex-col gap-1.5">
+                {stockLeft !== null && (
+                  <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-red-600 bg-red-50 border border-red-100 rounded-full px-3 py-1 w-fit animate-pulse">
+                    🔥 Only {stockLeft} left in stock — order soon!
+                  </div>
+                )}
+                <div className="inline-flex items-center gap-1.5 text-xs text-gray-500 bg-gray-50 border border-gray-100 rounded-full px-3 py-1 w-fit">
+                  <Eye size={12} />
+                  {viewersNow} people are viewing this right now
+                </div>
               </div>
 
               <div className="flex items-center gap-3">
@@ -125,6 +160,17 @@ export default function ProductPageClient({ product, relatedProducts }: ProductP
                 </Button>
               </div>
 
+              {/* WhatsApp Quick Order */}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-[#25D366] hover:bg-[#22c55e] text-white font-semibold rounded-lg transition-colors text-sm"
+              >
+                <MessageCircle size={18} />
+                Order via WhatsApp
+              </a>
+
               {!selectedSize && !selectedColor && (
                 <p className="text-sm text-gray-400">Please select a size and color</p>
               )}
@@ -146,6 +192,9 @@ export default function ProductPageClient({ product, relatedProducts }: ProductP
               </div>
             </div>
           </div>
+
+          {/* Reviews */}
+          <ProductReviews />
         </div>
 
         <RelatedProducts products={relatedProducts} currentId={product.id} />

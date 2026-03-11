@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ChatWidget from '@/components/ChatWidget'
+import FlashSaleBanner from '@/components/home/FlashSaleBanner'
 
 export const metadata: Metadata = {
   title: 'ARELYN | Elegant Fashion for the Modern Woman',
@@ -39,6 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body">
+        <FlashSaleBanner />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
