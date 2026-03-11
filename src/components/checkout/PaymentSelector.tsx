@@ -11,6 +11,7 @@ const paymentOptions: {
   color: string
   borderColor: string
   bgColor: string
+  checkBgColor: string
 }[] = [
   {
     method: 'bkash',
@@ -20,6 +21,7 @@ const paymentOptions: {
     color: 'text-bkash',
     borderColor: 'border-bkash',
     bgColor: 'bg-bkash/5',
+    checkBgColor: 'bg-bkash',
   },
   {
     method: 'nagad',
@@ -29,6 +31,7 @@ const paymentOptions: {
     color: 'text-nagad',
     borderColor: 'border-nagad',
     bgColor: 'bg-nagad/5',
+    checkBgColor: 'bg-nagad',
   },
   {
     method: 'cod',
@@ -38,6 +41,7 @@ const paymentOptions: {
     color: 'text-brand-sage',
     borderColor: 'border-brand-sage',
     bgColor: 'bg-brand-sage/5',
+    checkBgColor: 'bg-brand-sage',
   },
 ]
 
@@ -76,7 +80,7 @@ export default function PaymentSelector({ selected, onSelect }: PaymentSelectorP
               </div>
             </div>
             {selected === option.method && (
-              <div className={`w-6 h-6 rounded-full ${option.borderColor.replace('border', 'bg')} flex items-center justify-center`}>
+              <div className={`w-6 h-6 rounded-full ${option.checkBgColor} flex items-center justify-center`}>
                 <Check size={14} className="text-white" />
               </div>
             )}
