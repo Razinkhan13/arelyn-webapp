@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500" fill="none">
+  <rect width="400" height="500" fill="#FFF0F5"/>
+  <rect x="140" y="180" width="120" height="140" rx="8" fill="#E2136E" fill-opacity="0.1"/>
+  <path d="M200 210C200 204.477 204.477 200 210 200H190C195.523 200 200 204.477 200 210V260H200V210Z" fill="#E2136E" fill-opacity="0.15"/>
+  <text x="200" y="350" text-anchor="middle" font-family="serif" font-size="18" fill="#E2136E" fill-opacity="0.4">ARELYN</text>
+</svg>
