@@ -256,10 +256,10 @@ function App() {
             </p>
           </div>
           <div className="footer-links">
-            <a href="#">Lookbook</a>
-            <a href="#">Shipping</a>
-            <a href="#">Sustainability</a>
-            <a href="#">Support</a>
+            <button type="button" className="footer-link">Lookbook</button>
+            <button type="button" className="footer-link">Shipping</button>
+            <button type="button" className="footer-link">Sustainability</button>
+            <button type="button" className="footer-link">Support</button>
           </div>
         </div>
       </footer>
