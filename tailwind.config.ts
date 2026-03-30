@@ -10,13 +10,15 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          rose: '#E2136E',
+          rose: '#C0215B',
           blush: '#FFF0F5',
           gold: '#C9A96E',
-          dark: '#1A1A2E',
-          cream: '#FAF7F2',
+          dark: '#1A1412',
+          cream: '#FBF7F2',
           sage: '#2D7A4F',
         },
+        // Payment provider brand colors – kept at their official values,
+        // intentionally separate from the ARELYN brand palette above.
         bkash: '#E2136E',
         nagad: '#F05829',
       },

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-white text-brand-dark antialiased;
+    @apply bg-brand-cream text-brand-dark antialiased;
   }
 }
 
