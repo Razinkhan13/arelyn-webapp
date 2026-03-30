@@ -1,4 +1,6 @@
 import HeroSection from '@/components/home/HeroSection'
+import BrandValuesSection from '@/components/home/BrandValuesSection'
+import CategoriesSection from '@/components/home/CategoriesSection'
 import FeaturedProducts from '@/components/home/FeaturedProducts'
 import LookbookSection from '@/components/home/LookbookSection'
 import TestimonialsSection from '@/components/home/TestimonialsSection'
@@ -10,6 +12,8 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <BrandValuesSection />
+      <CategoriesSection />
       <FeaturedProducts />
       <LookbookSection />
       <ShopTheLookSection />
